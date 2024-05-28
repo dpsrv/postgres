@@ -1,0 +1,18 @@
+services:
+  dpsrv-postgres:
+    container_name: dpsrv-postgres-${tag:-latest}
+    image: postgres:${tag:-latest}
+    build: .
+    hostname: $HOSTNAME.dpsrv.me
+    user: 1000:1000
+    env_file:
+      - ${DPSRV_HOME}/rc/secrets/postgres/postgres.env
+      - ${DPSRV_HOME}/rc/secrets/local/${HOSTNAME}/${HOSTNAME}.env
+    volumes:
+      - ${DPSRV_HOME}/srv/postgres/:/var/lib/postgresql/data/
+      - /etc/localtime:/etc/localtime:ro
+    restart: unless-stopped
+networks:
+  default:
+    name: dpsrv
+    external: true
