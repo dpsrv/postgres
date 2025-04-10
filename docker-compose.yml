@@ -7,7 +7,7 @@ services:
     user: 1000:1000
     env_file:
       - ${DPSRV_HOME}/rc/secrets/postgres/postgres.env
-      - ${DPSRV_HOME}/rc/secrets/local/${HOSTNAME}/${HOSTNAME}.env
+      - ${DPSRV_HOME}/local.env
     volumes:
       - ${DPSRV_HOME}/srv/postgres/:/var/lib/postgresql/data/
       - /etc/localtime:/etc/localtime:ro
